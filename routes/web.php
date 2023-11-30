@@ -1,38 +1,40 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserController; // Perubahan: UserController ditambahkan 's' pada Controllers
+use App\Http\Controllers\ProdukController; // Perubahan: ProdukController ditambahkan 's' pada Controllers
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
-Route::group(['prefix' => 'users'], function () {
-    // Menampilkan daftar pengguna
-    Route::get('/', [UserController::class, 'index']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
-    // Menampilkan formulir untuk membuat pengguna baru
-    Route::get('/create', [UserController::class, 'create']);
+Route::get('/user', [UserController::class, 'index']); // Perubahan: Menggunakan UserController dan method index
+Route::get('/produk', [ProdukController::class, 'index']); // Perubahan: Menggunakan ProdukController dan method index
 
-    // Menyimpan pengguna baru ke dalam database
+Route::get('/about', function () {
+    return 'Halaman About';
+});
 
-    Route::post('/', [UserController::class, 'store']);
+Route::get('/about-us', function () { // Perubahan: Merapikan path route '/about-us'
+    $data = [
+        'pageTitle' => 'Tentang Kami',
+        'content' => 'Ini adalah halaman tentang kami.'
+    ];
+    return view('about', $data);
+});
 
-    // Menampilkan informasi tentang pengguna tertentu
-    Route::get('/{user}', [UserController::class, 'show']);
-
-    // Menampilkan formulir untuk mengedit pengguna
-    Route::get('/{user}/edit', [UserController::class, 'edit']);
-
-    // Menyimpan perubahan pengguna ke dalam database
-    Route::put('/{user}', [UserController::class, 'update']);
-
-    // Menghapus pengguna dari database
-    Route::delete('/{user}', [UserController::class, 'destroy']);
+Route::get('/profile', function () {
+    $nama = "Risna";
+    return view('profile.index', compact('nama'));
 });
