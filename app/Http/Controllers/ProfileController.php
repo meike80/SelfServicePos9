@@ -10,7 +10,7 @@ class ProfileController extends Controller
     {
         $nama = "Risna";
         $alamat = "Risna";
-        $tanggal_lahir = "21 juli 2002";
+        $tanggal_lahir = "21 Mei 2003";
         $data_array = array(
             "nama" => array(
                 "Risna", "risna", "Risna",

@@ -11,7 +11,7 @@
     <h1>Profil</h1>
     <hr>
     <table border='0'>
-        @if(isset($nama) && $nama == 'Aditia Nugraha')
+        @if(isset($nama) && $nama == 'Lilis Risnawati')
     <tr>
         <td>Nama Saya :</td>
         <td>{{ $nama }}</td>
@@ -22,7 +22,7 @@
 
     <hr>
     <h1>Contoh Penerapan</h1>
-    <br> Nama= Aditia Nugraha 
+    <br> Nama= Lilis Risnawati 
 
     <h1>Contoh forelse </h1>
     <table>
