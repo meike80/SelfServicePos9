@@ -38,3 +38,5 @@ Route::get('/profile', function () {
     $nama = "Risna";
     return view('profile.index', compact('nama'));
 });
+
+Route::resource('/produk', 'App\http\controllers\Produkcontroller');
