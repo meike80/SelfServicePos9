@@ -24,7 +24,7 @@ class ProdukController extends Controller
         $produk = produk::get();
 
         //render view with posts
-        return view('produk.index', compact('produk'));
+        return view ('produk.index', compact('produk'));
     }
     public function create()
     {
