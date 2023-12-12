@@ -47,7 +47,7 @@ class ProdukController extends Controller
             'stock' => $request->stock,
         ]);
 
-        return redirect('/produk');
+        return redirect('/produk')->with('success', 'Data Berhasil di Simpan');
     }
     public function edit($id)
     {
