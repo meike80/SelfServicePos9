@@ -19,8 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
 Route::get('/user', [UserController::class, 'index']); // Perubahan: Menggunakan UserController dan method index
-Route::get('/produk', [ProdukController::class, 'index']); // Perubahan: Menggunakan ProdukController dan method index
+Route::get('/product', [ProductController::class, 'index']); // Perubahan: Menggunakan ProdukController dan method index
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/about', function () {
     return 'Halaman About';
@@ -35,8 +38,19 @@ Route::get('/about-us', function () { // Perubahan: Merapikan path route '/about
 });
 
 Route::get('/profile', function () {
-    $nama = "Risna";
+    $nama = "risna ";
     return view('profile.index', compact('nama'));
+
 });
 
-Route::resource('/produk', 'App\http\controllers\Produkcontroller');
+//Route::resource('/product', 'App\http\controllers\Productcontroller');
+
+Route::middleware(['auth', 'user', 'admin'])->group(function() {
+    Route::resource('/product', App\http\controllers\ProductController::class);
+    Route::get('admin', function () {
+        return 'admin page'; 
+    });
+});
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
