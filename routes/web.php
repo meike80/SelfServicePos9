@@ -45,7 +45,7 @@ Route::get('/profile', function () {
 
 //Route::resource('/product', 'App\http\controllers\Productcontroller');
 
-Route::middleware(['auth', 'user', 'admin'])->group(function() {
+Route::middleware(['auth'])->group(function() {
     Route::resource('/product', App\http\controllers\ProductController::class);
     Route::get('admin', function () {
         return 'admin page'; 
