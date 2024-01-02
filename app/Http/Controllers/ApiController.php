@@ -7,77 +7,63 @@ use App\Models\Produk;
 
 class ApiController extends Controller
 {
-    public function produk_index()
-    {
+    public function produk_index(){
         $produk = Produk::get();
         return response()->json($produk);
     }
 
-    public function produk_store(Request $request)
-    {
-        // Validation logic can be added here
-
+    public function produk_store(Request $request){
         Produk::insert([
-            'produk' => $request->api_produk,
-            'price'  => $request->api_price,
-            'stock'  => $request->api_stock,
+            'produk'       => $request->api_produk,
+            'price'         => $request->api_price,
+            'stock'         => $request->api_stock,
         ]);
 
-        $response = [
-            'responseCode'   => '00',
-            'responseStatus' => 'Success'
-        ];
+        $response = array(
+            'responseCode'      => '00',
+            'responseStatus'    => 'Success'
+        );
         return response()->json($response);
     }
 
-    public function produk_by_id($id)
-    {
-        $produk = Produk::find($id);
-
-        if (!$produk) {
-            return response()->json(['Success' => 'Success']);
-        }
-
+    public function produck_by_id($id){
+        $produk = Produk::where('id', $id)->first();
         return response()->json($produk);
     }
 
-    public function produk_update(Request $request, $id)
-    {
-        // Validation logic can be added here
-
-        $produk = Produk::find($id);
-
-        if (!$produk) {
-            return response()->json(['Success' => 'Success Update']);
-        }
-
-        $produk->update([
-            'produk' => $request->api_produk,
-            'price'  => $request->api_price,
-            'stock'  => $request->api_stock,
+    public function produk_update($id, Request $request){
+        $produk = Produk::where('id', $id)->update([
+            'produk'       => $request->api_produk,
+            'price'         => $request->api_price,
+            'stock'         => $request->api_stock
         ]);
 
-        $response = [
-            'responseCode'   => '00',
-            'responseStatus' => 'Success Update'
-        ];
+        $response = array(
+            'responseCode'      => '00',
+            'responseStatus'    => 'Succes'
+        );
+
         return response()->json($response);
     }
 
-    public function produk_delete($id)
-    {
-        $produk = Produk::find($id);
+    public function produk_delete($id){
+        Produk::where('id', $id)->delete();
 
-        if (!$produk) {
-            return response()->json(['Success' => 'Success Delete']);
-        }
+        $response = array(
+            'responseCode'      => '00',
+            'responseStatus'    => 'Success Delete'
+        );
 
-        $produk->delete();
-
-        $response = [
-            'responseCode'   => '00',
-            'responseStatus' => 'Success Delete'
-        ];
         return response()->json($response);
+    }
+
+    public function create_produk(){
+        $formData = [
+            'produk'       => null,
+            'price'         => null,
+            'stock'         => null,
+        ];
+
+        return response()->json($formData);
     }
 }
