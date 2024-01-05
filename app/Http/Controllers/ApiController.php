@@ -46,8 +46,9 @@ class ApiController extends Controller
         return response()->json($response);
     }
 
-    public function produk_delete($id){
-        Produk::where('id', $id)->delete();
+
+    public function categories_delete($id){
+        categories::where('id', $id)->delete();
 
         $response = array(
             'responseCode'      => '00',
@@ -57,13 +58,52 @@ class ApiController extends Controller
         return response()->json($response);
     }
 
-    public function create_produk(){
+    public function create_categories(){
         $formData = [
-            'produk'       => null,
+            'categories'       => null,
             'price'         => null,
             'stock'         => null,
         ];
 
         return response()->json($formData);
     }
+
+        public function categories_index(){
+            $produk = categories::get();
+            return response()->json($categories);
+        }
+    
+        public function categories_store(Request $request){
+            categories::insert([
+                'categories'       => $request->api_categories,
+                'price'         => $request->api_price,
+                'stock'         => $request->api_stock,
+            ]);
+    
+            $response = array(
+                'responseCode'      => '00',
+                'responseStatus'    => 'Success'
+            );
+            return response()->json($response);
+        }
+    
+        public function categories_by_id($id){
+            $categories = categories::where('id', $id)->first();
+            return response()->json($categories);
+        }
+    
+        public function categories_update($id, Request $request){
+            $categories = categories::where('id', $id)->update([
+                'categories'       => $request->api_categories,
+                'price'         => $request->api_price,
+                'stock'         => $request->api_stock
+            ]);
+    
+            $response = array(
+                'responseCode'      => '00',
+                'responseStatus'    => 'Succes'
+            );
+    
+            return response()->json($response);
+        }
 }

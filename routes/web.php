@@ -21,13 +21,14 @@ Route::get('/product_vue', function () {
     return view('product_page');
 });
 
-Route::get('/{pathMatch}', function() {
-    return view('product_page');
-})->where('pathMatch', ".*");
+Route::get('/categories_vue', function () {
+    return view('categories_page');
+});
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('role:user');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/about', function () {
     $data = [
         'pageTitle' => 'Tentang Kami',

@@ -6,4 +6,4 @@ import app from './Component/app.vue'
 
 import router from './router/index.js'
 
-createApp(app).use(router).mount('#app')
+createApp({}).use(router).mount('#app')

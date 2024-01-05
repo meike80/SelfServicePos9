@@ -23,6 +23,15 @@ Route::delete('produk/{id}','App\Http\Controllers\ApiController@produk_delete');
 Route::get('produk_form','App\Http\Controllers\ApiController@create_produk');
 Route::post('produk_update/{id}','App\Http\Controllers\ApiController@produk_update');
 
+Route::get('categories','App\Http\Controllers\ApiController@categories_index');
+Route::post('categories','App\Http\Controllers\ApiController@categories_store');
+Route::get('categories/{id}','App\Http\Controllers\ApiController@categories_by_id');
+Route::patch('categories/{id}','App\Http\Controllers\ApiController@categories_update');
+Route::delete('categories/{id}','App\Http\Controllers\ApiController@categories_delete');
+
+Route::get('categories_form','App\Http\Controllers\ApiController@create_categories');
+Route::post('categories_update/{id}','App\Http\Controllers\ApiController@categories_update');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
